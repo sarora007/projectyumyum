@@ -1,3 +1,7 @@
+from google.appengine.ext import vendor
+
+vendor.add('lib')
+
 from flask import Flask
 app = Flask(__name__)
 app.config['DEBUG'] = True
