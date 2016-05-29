@@ -44,7 +44,7 @@ def add():
 	NewItem.put()
 	return "added, Sandy"
 
-@app.route('/list')
+@app.route('/')
 def GetItems():
 	items = Item.query().fetch()
 	template = JINJA_ENVIRONMENT.get_template('show.html')
