@@ -60,6 +60,12 @@ def deleteItems():
 @app.route('/update', methods=['GET'])
 def updateItems():
 	id=request.args.get('id')
+	quant=request.args.get('quant')
+	key = ndb.Key(urlsafe=id)
+	item = key.get()
+	item.quantity = float(quant)
+	item.put()
+	return 'updated ' + id + " with value " + quant
 
 @app.errorhandler(404)
 def page_not_found(e):

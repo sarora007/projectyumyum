@@ -22,7 +22,7 @@
 			<tr>
 				<td>{{ item.name }}</td>
 				<td>
-					<input value = "{{ item.quantity }}" type="number" step="any" name="quantity" style="width: 55px;">
+					<input value="{{ item.quantity }}" type="number" step="any" name="{{ item.key.urlsafe() }}" style="width: 55px;">
 				</td>
 				<td>{{ item.unit }}</td>
 				<td>
@@ -42,6 +42,11 @@
     			console.log(data);
     			$("#"+e.target.id).parent().parent().remove();
     		});	
+    	});
+    	$(':input').change(function(e){
+        	$.get('/update', {'id':e.target.name, 'quant':$(this).val()}, function(data){
+        		console.log(data);
+        	})
     	});
     </script>
   </body>
