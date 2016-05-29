@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scan your recipt</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  </head>
+  <body>
+		<table class="table">
+			<thead> 
+				<tr> 
+					<th>Name</th> 
+					<th>Quantity</th> 
+					<th>Unit</th> 
+				</tr> 
+			</thead>
+			<tbody>
+			{% for item in items %}
+			<tr>
+				<td>{{ item.name }}</td>
+				<td>
+					<input value = "{{ item.quantity }}" type="number" step="any" name="quantity" style="width: 55px;">
+				</td>
+				<td>{{ item.unit }}</td>
+				<td>
+					<button class="btn" id="{{ item.key.urlsafe() }}">Delete</button>
+				</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script>
+    	$(".btn").click(function(e){
+    		console.log(e.target.id);
+    		$.get('/delete',{'id': e.target.id}, function(data){
+    			console.log(data);
+    			$("#"+e.target.id).parent().parent().remove();
+    		});	
+    	});
+    </script>
+  </body>
+</html>
